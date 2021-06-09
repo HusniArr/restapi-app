@@ -7,4 +7,9 @@ const conn = mysql.createConnection({
 	database:"db_restapi"
 })
 
+conn.connect((err)=>{
+	if(err) throw err;
+	console.log('Database berhasil terkoneksi.');
+})
+	
 module.exports = conn;
