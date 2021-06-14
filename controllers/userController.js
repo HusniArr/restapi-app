@@ -67,8 +67,17 @@ exports.update = (req,res)=>{
 		})
 
 }
+
+exports.delete = (req,res)=>{
+	const sql = "DELETE FROM users WHERE id_user="+req.params.id;
+	conn.query(sql,(err,results)=>{
+		if(err) throw err; 
+		res.send({message:"Berhasil dihapus."});
+		return;
+	})
+}
 exports.halamanadmin = (req,res)=>{
-	return res.send({message:"halaman ini hanya untuk role admin."});
+	return res.send({message:"Selamat datang di halaman admin."});
 }
 
 

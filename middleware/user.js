@@ -150,13 +150,18 @@ exports.verify = (req,res,next)=>{
 					if(err){
 					 return	res.send({auth:false,message:"Token tidak ditemukan."});
 					}else{
-						if(level == 'admin'){
-							req.auth = decoded;
-							next();
+						const sql = "SELECT * FROM users WHERE id_user="+req.params.id;
+						conn.query(sql,(err,result)=>{
+							if(result[0].level == 'admin'){
+								req.auth = decoded;
+								next();
 
-						}else{
-							return	res.send({auth:false,message:"Gagal otorisasi role anda."});
-						}
+							}else{
+								return	res.send({auth:false,message:"Gagal otorisasi role anda."});
+
+							}
+						})
+						
 					}
 				});
 
