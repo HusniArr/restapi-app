@@ -1,10 +1,52 @@
-const conn = require('../config.js');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const conn = require('../config/db-config.js');
 
-conn.connect((err)=>{
-	if(err) throw err;
-	console.log('db mysql berhasil terkoneksi.');
-	conn.query("CREATE TABLE users (id_user int auto_increment primary key, username varchar(20) not null , pass varchar(8) not null, level varchar(20) not null)",(err,res)=>{
+exports.register = async(req,res)=>{
+	const username = req.body.username;
+	const sql = "SELECT * FROM users WHERE username =?";
+	conn.query(sql,username,async(err,result)=>{
 		if(err) throw err;
-		console.log('tabel berhasil dibuat.')
+		
+		if(result.length > 0){
+			res.send({message:"username sudah terdaftar."});
+			return;
+		}else{
+			bcrypt.genSalt(10,(err,salt)=>{
+				 if (err) {
+				    throw err
+				  } else {
+				    bcrypt.hash(req.body.pass, salt, function(err, hash) {
+				      if (err) {
+				        throw err
+				      } else {
+				        // console.log(hash)
+				        const data = {
+						username : req.body.username,
+						pass : hash,
+						level : req.body.level
+						}
+					const sql = "INSERT INTO users SET ?"
+					conn.query(sql,data,(err,result)=>{
+						if(err) throw err;
+						res.status(201).send({message:"Berhasil ditambahkan."});
+						return;
+					})
+				      }
+				  })
+				}
+		
+			})
+		}
 	})
-})
+
+}
+
+
+exports.halamanadmin = (req,res)=>{
+	return res.send({message:"halaman ini hanya untuk role admin."});
+}
+
+
+
+

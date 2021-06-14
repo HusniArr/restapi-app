@@ -1,5 +1,8 @@
+const blog  = require('../controllers/blogController.js');
+
 module.exports = app =>{
-	const blog  = require('../controllers/blogController.js');
+	
+
 
 	// get all blog
 	app.get('/blog',blog.findAll);
@@ -15,4 +18,6 @@ module.exports = app =>{
 
 	// delete blog
 	app.delete('/blog/:id',blog.delete);
+
+
 };

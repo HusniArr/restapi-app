@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 2021;
 
+
 // parse request of content-type : application/json
 app.use(bodyParser.json());
 
@@ -10,6 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 require('./routes/blog.route.js')(app);
+require('./routes/user.route.js')(app);
 
 app.listen(port,(req,res)=>{
 	console.log('server running on port'+port);
