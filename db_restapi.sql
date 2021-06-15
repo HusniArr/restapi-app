@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Jun 2021 pada 01.27
+-- Waktu pembuatan: 15 Jun 2021 pada 01.27
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 7.4.14
 
@@ -43,7 +43,8 @@ INSERT INTO `blogs` (`id`, `title`, `body`, `created_by`) VALUES
 (2, 'Blog kedua saya', 'ini adalah post blog kedua saya', 'Hello world'),
 (3, 'blog ketiga saya', 'ini adalah blog ketiga saya', 'jhon doe'),
 (4, 'blog keempat saya', 'ini adalah blog keempat saya', 'jhon doe'),
-(5, 'blog kelima saya kuy...', 'ini adalah blog kelima saya', 'James Bondos');
+(5, 'blog kelima saya kuy...', 'ini adalah blog kelima saya', 'James Bondos'),
+(7, 'Blog keenam saya', 'ini adalah blog keenam saya', 'admin');
 
 -- --------------------------------------------------------
 
@@ -54,9 +55,17 @@ INSERT INTO `blogs` (`id`, `title`, `body`, `created_by`) VALUES
 CREATE TABLE `users` (
   `id_user` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `pass` varchar(8) NOT NULL,
+  `pass` varchar(100) DEFAULT NULL,
   `level` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id_user`, `username`, `pass`, `level`) VALUES
+(5, 'admin', '$2a$10$/JGkFhUkrKndx9B.BDdY4.uazm49qkEvZaKns0iHqwuz2yEmfbYTC', 'admin'),
+(6, 'Joe Shandy', '$2a$10$FMKZ.eFR01KkPixKHdxK6uVc/I4i5lrqu4LgKjYUQYojdyBjUrHaq', 'member');
 
 --
 -- Indexes for dumped tables
@@ -82,13 +91,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
