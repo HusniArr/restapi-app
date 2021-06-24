@@ -7,5 +7,7 @@ module.exports = app =>{
   app.get('/secret/:id',UserMiddleware.verify,UserController.halamanadmin);
  	app.put('/user/:id',UserMiddleware.validationEdit,UserController.update);
  	app.delete('/user/:id',UserController.delete);
+ 	app.post('/user/gen',UserController.getKey);
+ 	app.get('/user',UserController.getById);
 }
 

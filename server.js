@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 require('./routes/blog.route.js')(app);
 require('./routes/user.route.js')(app);
-
+require('./routes/employee.route.js')(app);
 app.listen(port,(req,res)=>{
 	console.log('server running on port'+port);
 })
